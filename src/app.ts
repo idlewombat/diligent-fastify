@@ -4,7 +4,9 @@ type PostPetsRoute = {
   Body: { name: string; kind: "cat" | "dog" };
 };
 
-const paramsSchema = {
+// JSON Schema definitions:
+
+const beverageParamsSchema = {
   type: "object",
   properties: {
     drink: { enum: ["tea", "coffee", "chai"] },
@@ -12,8 +14,11 @@ const paramsSchema = {
   required: ["drink"],
   additionalProperties: false,
 };
+// This schema defines the expected shape of the parameters in the /api/beverages/:drink route.
+// It specifies that the drink parameter must be one of the enum values: "tea", "coffee", or "chai".
+// -------------------------------------------------------------------------------------------------
 
-const querySchema = {
+const beverageQuerySchema = {
   type: "object",
   properties: {
     milk: { enum: ["yes", "no"] },
@@ -21,8 +26,11 @@ const querySchema = {
   },
   additionalProperties: false,
 };
+// This schema defines the expected shape of the query parameters.
+// the milk and sugar query parameters must be one of the enum values: "yes" or "no".
+// ----------------------------------------------------------------------------------
 
-const bodySchema = {
+const beverageBodySchema = {
   type: "object",
   properties: {
     kind: { type: "string" },
@@ -30,6 +38,13 @@ const bodySchema = {
   required: ["kind"],
   additionalProperties: false,
 };
+// the expected shape of the request body.
+// It specifies that the kind property must be a string.
+// -----------------------------------------------------
+//
+//
+//
+// define the shape of the route for /api/beverages/:drink endpoint:
 
 type PostBeveragesRoute = {
   Params: {
@@ -47,6 +62,7 @@ type PostBeveragesRoute = {
     with: string[];
   };
 };
+// -----------------------------------------------------
 
 export default function createApp(options = {}) {
   const app = fastify(options);
@@ -67,9 +83,9 @@ export default function createApp(options = {}) {
     "/api/beverages/:drink",
     {
       schema: {
-        params: paramsSchema,
-        querystring: querySchema,
-        body: bodySchema,
+        params: beverageParamsSchema,
+        querystring: beverageQuerySchema,
+        body: beverageBodySchema,
       },
     },
     (request, reply) => {
