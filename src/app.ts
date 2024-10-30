@@ -4,7 +4,7 @@ type PostPetsRoute = {
   Body: { name: string; kind: "cat" | "dog" };
 };
 
-// JSON Schema definitions:
+// JSON SCHEMA DEFINITIONS:
 
 const beverageParamsSchema = {
   type: "object",
@@ -42,6 +42,12 @@ const beverageBodySchema = {
 // It specifies that the kind property must be a string.
 // -----------------------------------------------------
 //
+/*These JSON schema definitions are useful for:
+
+Validation: The schemas can be used to validate the incoming request data (parameters, query parameters, and request body) to ensure it matches the expected shape and data types. This helps catch errors early and provide better error messages to the client.
+Documentation: The schemas serve as a clear and concise documentation of the expected data structure for the /api/beverages/:drink route. This makes it easier for developers to understand the API's requirements and integrate with it.
+Automatic code generation: Some tools can use the JSON schemas to automatically generate client-side code (e.g., TypeScript types, API clients) or server-side code (e.g., route handlers, input validation) – reducing boilerplate and ensuring consistency across the codebase.
+Data transformation: The schemas can be used to transform the incoming data into the expected shape before processing it in the route handler.*/
 //
 //
 // define the shape of the route for /api/beverages/:drink endpoint:
